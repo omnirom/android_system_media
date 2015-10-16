@@ -1656,6 +1656,13 @@ static inline bool audio_has_proportional_frames(audio_format_t format)
             || mainFormat == AUDIO_FORMAT_IEC61937);
 }
 
+#ifdef QCOM_HARDWARE
+static inline bool audio_is_offload_pcm(audio_format_t format)
+{
+    return ((format & AUDIO_FORMAT_MAIN_MASK) == AUDIO_FORMAT_PCM_OFFLOAD);
+}
+#endif
+
 static inline size_t audio_bytes_per_sample(audio_format_t format)
 {
     size_t size = 0;
