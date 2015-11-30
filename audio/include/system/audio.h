@@ -1494,8 +1494,8 @@ static inline bool audio_is_valid_format(audio_format_t format)
                 format != AUDIO_FORMAT_PCM_24_BIT_OFFLOAD) {
             return false;
         }
-        return true;
 #endif
+        return true;
     default:
         return false;
     }
