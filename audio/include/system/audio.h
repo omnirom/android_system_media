@@ -330,6 +330,7 @@ typedef enum {
     AUDIO_FORMAT_ALAC                = 0x1C000000UL,
     AUDIO_FORMAT_APE                 = 0x1D000000UL,
     AUDIO_FORMAT_AAC_ADTS            = 0x1E000000UL,
+    AUDIO_FORMAT_DSD                 = 0x1F000000UL,
 #endif
     // IEC61937 is encoded audio wrapped in 16-bit PCM.
     AUDIO_FORMAT_IEC61937            = 0x0D000000UL,
@@ -1564,6 +1565,7 @@ static inline bool audio_is_valid_format(audio_format_t format)
     case AUDIO_FORMAT_APE:
     case AUDIO_FORMAT_WMA:
     case AUDIO_FORMAT_WMA_PRO:
+    case AUDIO_FORMAT_DSD:
         return true;
     case AUDIO_FORMAT_PCM_OFFLOAD:
         if (format != AUDIO_FORMAT_PCM_16_BIT_OFFLOAD &&
