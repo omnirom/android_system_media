@@ -331,6 +331,9 @@ typedef enum {
     AUDIO_FORMAT_APE                 = 0x1D000000UL,
     AUDIO_FORMAT_AAC_ADTS            = 0x1E000000UL,
     AUDIO_FORMAT_DSD                 = 0x1F000000UL,
+    AUDIO_FORMAT_SBC                 = 0x20000000UL,
+    AUDIO_FORMAT_APTX                = 0x21000000UL,
+    AUDIO_FORMAT_APTX_HD             = 0x22000000UL,
 #endif
     // IEC61937 is encoded audio wrapped in 16-bit PCM.
     AUDIO_FORMAT_IEC61937            = 0x0D000000UL,
@@ -935,6 +938,45 @@ typedef struct {
     audio_usage_t usage;
 #endif
 } audio_offload_info_t;
+
+/* Information about BT SBC encoder configuration
+ * This data is used between audio HAL module and
+ * BT IPC library to configure DSP encoder
+ */
+typedef struct {
+    uint32_t subband;    /* 4, 8 */
+    uint32_t blk_len;    /* 4, 8, 12, 16 */
+    uint16_t sampling_rate; /*44.1khz,48khz*/
+    uint8_t  channels;      /*0(Mono),1(Dual_mono),2(Stereo),3(JS)*/
+    uint8_t  alloc;         /*0(Loudness),1(SNR)*/
+    uint8_t  min_bitpool;   /* 2 */
+    uint8_t  max_bitpool;   /*53(44.1khz),51 (48khz) */
+    uint32_t bitrate;      /* 320kbps to 512kbps */
+} audio_sbc_encoder_config;
+
+
+/* Information about BT APTX encoder configuration
+ * This data is used between audio HAL module and
+ * BT IPC library to configure DSP encoder
+ */
+typedef struct {
+    uint16_t sampling_rate;
+    uint8_t  channels;
+    uint32_t bitrate;
+} audio_aptx_encoder_config;
+
+
+/* Information about BT AAC encoder configuration
+ * This data is used between audio HAL module and
+ * BT IPC library to configure DSP encoder
+ */
+typedef struct {
+    uint32_t enc_mode; /* LC, SBR, PS */
+    uint16_t format_flag; /* RAW, ADTS */
+    uint16_t channels; /* 1-Mono, 2-Stereo */
+    uint32_t sampling_rate;
+    uint32_t bitrate;
+} audio_aac_encoder_config;
 
 #define AUDIO_MAKE_OFFLOAD_INFO_VERSION(maj,min) \
             ((((maj) & 0xff) << 8) | ((min) & 0xff))
