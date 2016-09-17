@@ -579,11 +579,6 @@ static int alloc_mixer_state(struct audio_route *ar)
         type = mixer_ctl_get_type(ctl);
 
         if (!is_supported_ctl_type(type)) {
-#ifdef QCOM_HARDWARE
-            ar->mixer_state[i].old_value = NULL;
-            ar->mixer_state[i].new_value = NULL;
-            ar->mixer_state[i].reset_value = NULL;
-#endif
             continue;
         }
 
