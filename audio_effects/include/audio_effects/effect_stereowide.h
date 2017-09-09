@@ -15,32 +15,20 @@
  * limitations under the License.
  */
 
+/*
+ * USAGE NOTE: Only include this header when _implementing_ a particular
+ * effect. When access to UUID and properties is enough, include the
+ * corresponding header from system/audio_effects/, which doesn't include
+ * hardware/audio_effect.h.
+ *
+ * Only code that immediately calls into HAL or implements an effect
+ * can import hardware/audio_effect.h.
+ */
+
 #ifndef ANDROID_EFFECT_STEREOWIDE_H_
 #define ANDROID_EFFECT_STEREOWIDE_H_
 
 #include <hardware/audio_effect.h>
+#include <system/audio_effects/effect_stereowide.h>
 
-#if __cplusplus
-extern "C" {
-#endif
-
-#ifndef OPENSL_ES_H_
-/* 37cc2c00-dddd-11db-8577-0002a5d5c51c */
-static const effect_uuid_t SL_IID_STEREOWIDE_ = { 0x37cc2c00, 0xdddd, 0x11db, 0x8577,
-        { 0x00, 0x02, 0xa5, 0xd5, 0xc5, 0x1c } };
-const effect_uuid_t * const SL_IID_STEREOWIDE = &SL_IID_STEREOWIDE_;
-#endif //OPENSL_ES_H_
-
-/* enumerated parameter settings for stereowide effect */
-typedef enum
-{
-    STEREOWIDE_PARAM_STRENGTH_SUPPORTED,
-    STEREOWIDE_PARAM_STRENGTH
-} t_stereowide_params;
-
-#if __cplusplus
-}  // extern "C"
-#endif
-
-
-#endif /*ANDROID_EFFECT_VIRTUALIZER_H_*/
+#endif /*ANDROID_EFFECT_STEREOWIDE_H_*/
